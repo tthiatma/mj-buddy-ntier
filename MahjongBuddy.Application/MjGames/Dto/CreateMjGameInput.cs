@@ -5,7 +5,7 @@ using MahjongBuddy.Game;
 namespace MahjongBuddy.MjGames.Dto
 {
     [AutoMap(typeof(MjGame))]
-    public class CreateMjGameInput : IInputDto
+    public class CreateMjGameInput
     {
         public bool IsPrivateGame { get; set; }
         public string GameRoomPassword { get; set; }

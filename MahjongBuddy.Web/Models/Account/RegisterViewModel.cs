@@ -8,7 +8,7 @@ using MahjongBuddy.Users;
 
 namespace MahjongBuddy.Web.Models.Account
 {
-    public class RegisterViewModel : IInputDto, IValidatableObject
+    public class RegisterViewModel : IValidatableObject
     {
         /// <summary>
         /// Not required for single-tenant applications.

@@ -4,6 +4,11 @@
     <text name="HomePage" value="Home page" />
     <text name="GameCreatedMessage" value="Game created!" />
     <text name="Lobby" value="Lobby" />
+    <text name="Rule" value="Rule" />
+    <text name="Private" value="Private" />
+    <text name="Players" value="Players" />
+    <text name="Join" value="Join" />
+    <text name="CreateNewGame" value="Create New Game" />
     <text name="About" value="About" />
     <text name="WellcomeMessage" value="Welcome to MahjongBuddy!" />
     

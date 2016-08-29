@@ -3,11 +3,11 @@ using Abp.Zero.EntityFramework;
 using MahjongBuddy.Authorization.Roles;
 using MahjongBuddy.MultiTenancy;
 using MahjongBuddy.Users;
-using MahjongBuddy.Tiles;
 using System.Data.Entity;
 using MahjongBuddy.Game.Rule;
 using MahjongBuddy.Game;
 using MahjongBuddy.Connection;
+using MahjongBuddy.Tiles;
 
 namespace MahjongBuddy.EntityFramework
 {
@@ -26,7 +26,6 @@ namespace MahjongBuddy.EntityFramework
         public virtual IDbSet<MjTileInGame> MjTileInGames { get; set; }
         public virtual IDbSet<MjTileSet> MjTileSets { get; set; }
         public virtual IDbSet<MjWinningTileSet> MjWinningTileSets { get; set; }
-
 
         /* NOTE: 
          *   Setting "Default" to base class helps us when working migration commands on Package Manager Console.

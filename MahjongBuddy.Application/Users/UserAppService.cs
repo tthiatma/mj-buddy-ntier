@@ -7,7 +7,6 @@ using Abp.Domain.Repositories;
 using MahjongBuddy.Authorization;
 using MahjongBuddy.Users.Dto;
 using Microsoft.AspNet.Identity;
-using MahjongBuddy.Game;
 
 namespace MahjongBuddy.Users
 {
@@ -18,7 +17,7 @@ namespace MahjongBuddy.Users
         private readonly IRepository<User, long> _userRepository;
         private readonly IPermissionManager _permissionManager;
 
-        public UserAppService(IRepository<User, long> userRepository ,IPermissionManager permissionManager)
+        public UserAppService(IRepository<User, long> userRepository, IPermissionManager permissionManager)
         {
             _userRepository = userRepository;
             _permissionManager = permissionManager;

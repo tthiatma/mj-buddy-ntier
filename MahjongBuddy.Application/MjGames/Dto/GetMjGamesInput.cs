@@ -2,7 +2,7 @@
 
 namespace MahjongBuddy.MjGames.Dto
 {
-    public class GetMjGamesInput : IInputDto
+    public class GetMjGamesInput
     {
         public int Count { get; set; }
     }

@@ -6,7 +6,6 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using Abp.Auditing;
 using Abp.Authorization.Users;
 using Abp.AutoMapper;
 using Abp.Configuration.Startup;
@@ -14,7 +13,7 @@ using Abp.Domain.Uow;
 using Abp.Extensions;
 using Abp.Threading;
 using Abp.UI;
-using Abp.Web.Mvc.Models;
+using Abp.Web.Models;
 using MahjongBuddy.Authorization.Roles;
 using MahjongBuddy.MultiTenancy;
 using MahjongBuddy.Users;
@@ -96,7 +95,7 @@ namespace MahjongBuddy.Web.Controllers
                 returnUrl = returnUrl + returnUrlHash;
             }
 
-            return Json(new MvcAjaxResponse { TargetUrl = returnUrl });
+            return Json(new AjaxResponse { TargetUrl = returnUrl });
         }
 
         private async Task<AbpUserManager<Tenant, Role, User>.AbpLoginResult> GetLoginResultAsync(string usernameOrEmailAddress, string password, string tenancyName)
@@ -212,6 +211,7 @@ namespace MahjongBuddy.Web.Controllers
                     {
                         new UserLogin
                         {
+                            TenantId = tenant.Id,
                             LoginProvider = externalLoginInfo.Login.LoginProvider,
                             ProviderKey = externalLoginInfo.Login.ProviderKey
                         }

@@ -116,7 +116,7 @@ namespace MahjongBuddy.Tests
             UsingDbContext(AbpSession.TenantId, action);
         }
 
-        protected Task UsingDbContextAsync(Action<MahjongBuddyDbContext> action)
+        protected Task UsingDbContextAsync(Func<MahjongBuddyDbContext, Task> action)
         {
             return UsingDbContextAsync(AbpSession.TenantId, action);
         }
@@ -144,14 +144,14 @@ namespace MahjongBuddy.Tests
             }
         }
 
-        protected async Task UsingDbContextAsync(int? tenantId, Action<MahjongBuddyDbContext> action)
+        protected async Task UsingDbContextAsync(int? tenantId, Func<MahjongBuddyDbContext, Task> action)
         {
             using (UsingTenantId(tenantId))
             {
                 using (var context = LocalIocManager.Resolve<MahjongBuddyDbContext>())
                 {
                     context.DisableAllFilters();
-                    action(context);
+                    await action(context);
                     await context.SaveChangesAsync();
                 }
             }

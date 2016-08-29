@@ -12,6 +12,24 @@
     angular.module('app').controller(controllerId, [
         '$scope', 'abp.services.app.mjGame', function ($scope, mjGameService) {
             var vm = this;
+
+            vm.games = [];
+
+            vm.getMjGamesInput = {
+                Count: 10
+            };
+
+            var getAllMjGames = function () {
+                mjGameService.getMjGames(
+                        vm.getMjGamesInput
+                    ).success(function (result) {
+                        vm.games = result.items;
+                    })
+            };
+
+            getAllMjGames();
+
+
       
             vm.game = {
                 isPrivateGame: true,
@@ -19,20 +37,7 @@
                 mjRuleId: 1
             };
             
-            vm.getMjGamesInput = {
-                Count: 10
-            };
 
-            vm.getAllMjGames = function () {
-                abp.ui.setBusy(
-                    null,
-                    mjGameService.getMjGames(
-                        vm.getMjGamesInput
-                    ).success(function (result) {
-                        var test = result;
-                    })
-                );
-            };
 
             vm.createMjGame = function () {
                 abp.ui.setBusy(
@@ -45,6 +50,9 @@
                     })
                 );
             };
+
+
+            
         }
     ]);
 })();

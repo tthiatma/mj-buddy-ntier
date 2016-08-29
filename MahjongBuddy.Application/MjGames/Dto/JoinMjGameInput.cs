@@ -2,7 +2,7 @@
 
 namespace MahjongBuddy.MjGames.Dto
 {
-    public class JoinMjGameInput : IInputDto
+    public class JoinMjGameInput
     {
     }
 }
