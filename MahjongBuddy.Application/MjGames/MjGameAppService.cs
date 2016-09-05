@@ -25,7 +25,7 @@ namespace MahjongBuddy.Games
         public void CreateMjGame(CreateMjGameInput input)
         {
             var game = input.MapTo<MjGame>();
-            game.CreatorUserId = AbpSession.UserId;
+            game.CreatorId = AbpSession.UserId;
             _mjGameRepository.Insert(game);
         }
 

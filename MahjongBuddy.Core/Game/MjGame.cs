@@ -4,7 +4,6 @@ using MahjongBuddy.Game.Rule;
 using System.Collections.Generic;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
-using Abp.RealTime;
 using MahjongBuddy.Users;
 
 namespace MahjongBuddy.Game
@@ -14,12 +13,11 @@ namespace MahjongBuddy.Game
     /// </summary>
     public class MjGame : Entity<long>, IHasCreationTime
     {
-        public ICollection<User> Users { get; set; }
-
-        [ForeignKey("CreatorUserId")]
+        [ForeignKey("CreatorId")]
         public virtual User Creator { get; set; }
+        public virtual long? CreatorId { get; set; }
 
-        public virtual long? CreatorUserId { get; set; }
+        public virtual ICollection<User> Users { get; set; }
 
         public virtual bool IsPrivateGame { get; set; }
 

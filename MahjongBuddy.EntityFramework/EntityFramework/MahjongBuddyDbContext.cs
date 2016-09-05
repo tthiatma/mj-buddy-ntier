@@ -20,6 +20,7 @@ namespace MahjongBuddy.EntityFramework
         public virtual IDbSet<MjGameSession> MjGameSessions { get; set; }
         public virtual IDbSet<MjUserPlayingSession> MjUserPlayingSessions { get; set; }
         public virtual IDbSet<MjSignalRConnection> MjSignalRConnections { get; set; }
+        public virtual IDbSet<MjGameSessionResult> MjGameSessionResults { get; set; }
 
         //Tiles
         public virtual IDbSet<MjTile> MjTiles { get; set; }
