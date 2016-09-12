@@ -1,0 +1,31 @@
+﻿<div>
+    <form name="gameCreateForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span>@L("CreateNewGame")</span>
+            </h4>
+        </div>
+
+        <div class="modal-body">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="IsPrivate" ng-model="vm.game.isPrivateGame" value="false"> @L("Private")
+                </label>
+            </div>
+
+            <div class="form-group" ng-hide="!vm.game.isPrivateGame">
+                <label>@L("Password")</label>
+                <input type="text" name="Password" class="form-control" ng-model="vm.game.roomPassword">
+            </div>
+
+            <div class="form-group">
+                <label>@L("Rule")</label>
+                Hongkong
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" ng-click="vm.cancel()">@L("Cancel")</button>
+            <button type="submit" class="btn btn-primary blue" ng-click="vm.createMjGame()" ng-disabled="gameCreateForm.$invalid"><i class="fa fa-save"></i> <span>@L("Save")</span></button>
+        </div>
+    </form>
+</div>

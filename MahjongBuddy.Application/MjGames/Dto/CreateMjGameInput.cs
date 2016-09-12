@@ -8,7 +8,7 @@ namespace MahjongBuddy.MjGames.Dto
     public class CreateMjGameInput
     {
         public bool IsPrivateGame { get; set; }
-        public string GameRoomPassword { get; set; }
+        public string RoomPassword { get; set; }
         public int MjRuleId { get; set; }
     }
 }
