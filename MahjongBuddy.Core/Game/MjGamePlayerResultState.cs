@@ -2,10 +2,10 @@
 {
     public enum MjGamePlayerResultState : byte
     {
-        SelfPick = 0,
-        Eater = 1,
-        LostToSelfPick = 2,
-        Feeder = 3,
-        NothingHappened = 4
+        SelfPick = 1,
+        Eater = 2,
+        LostToSelfPick = 3,
+        Feeder = 4,
+        NothingHappened = 5
     }
 }

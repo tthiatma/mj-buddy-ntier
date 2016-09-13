@@ -1,13 +1,13 @@
 ﻿(function() {
     var controllerId = 'app.views.lobby';
-    var chatHub = $.connection.gameHub; //get a reference to the hub
+    var gameHub = $.connection.gameHub; //get a reference to the hub
 
-    chatHub.client.getMessage = function (message) { //register for incoming messages
+    gameHub.client.getMessage = function (message) { //register for incoming messages
         console.log('received message: ' + message);
     };
 
     abp.event.on('abp.signalr.connected', function () { //register for connect event
-        chatHub.server.sendMessage("Hi everybody, I'm connected to the chat!"); //send a message to the server
+        gameHub.server.sendMessage("Hi everybody, I'm connected to the chat!"); //send a message to the server
     });
     angular.module('app').controller(controllerId, [
         '$scope', '$modal', 'abp.services.app.mjGame',
@@ -20,6 +20,11 @@
                 Count: 10
             };
 
+            vm.joinGame = function (game) {
+                mjGameService.joinGame(game)
+                .success(function (result) {
+                })
+            };
             var getAllMjGames = function () {
                 mjGameService.getMjGames(
                         vm.getMjGamesInput

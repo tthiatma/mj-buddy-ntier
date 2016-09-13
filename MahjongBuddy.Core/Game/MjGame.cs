@@ -30,6 +30,8 @@ namespace MahjongBuddy.Game
 
         public DateTime CreationTime { get; set; }
 
+        public virtual long? ActiveSessionId { get; set; }
+
         /// <summary>
         /// List of status of game
         /// </summary>

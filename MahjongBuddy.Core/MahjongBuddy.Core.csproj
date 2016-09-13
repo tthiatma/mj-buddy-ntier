@@ -93,6 +93,7 @@
     <Compile Include="Connection\MjSignalRConnection.cs" />
     <Compile Include="Game\MjGameSessionResult.cs" />
     <Compile Include="Game\MjGamePlayerResultState.cs" />
+    <Compile Include="Game\MjGameWind.cs" />
     <Compile Include="MahjongBuddyConsts.cs" />
     <Compile Include="MahjongBuddyCoreModule.cs" />
     <Compile Include="Authorization\MahjongBuddyAuthorizationProvider.cs" />

@@ -1,4 +1,6 @@
 ﻿(function () {
+    var gameHub = $.connection.gameHub; //get a reference to the hub
+
     angular.module('app').controller('app.views.lobby.createModal', [
         '$scope', '$location', '$modalInstance', 'abp.services.app.mjGame',
         function ($scope, $location, $modalInstance, mjGameService) {
@@ -11,12 +13,9 @@
             };
 
             vm.createMjGame = function () {
-                mjGameService.createMjGame(
-                    vm.game
-                ).success(function () {
-                    $location.path('/');
-                    $modalInstance.close();
-                })
+                gameHub.server.createMjGame(vm.game);
+                $location.path('/');
+                $modalInstance.close();
             };
 
             vm.cancel = function () {

@@ -23,12 +23,12 @@ namespace MahjongBuddy.Game
         /// <summary>
         /// Represents current wind of the game
         /// </summary>
-        public virtual string Wind { get; set; }
+        public virtual MjGameWind Wind { get; set; }
 
         /// <summary>
         /// Represents 1st , 2nd, ...16th game
         /// </summary>
-        public virtual string GameNo{ get; set; }
+        public virtual int GameNo{ get; set; }
 
     }
 }

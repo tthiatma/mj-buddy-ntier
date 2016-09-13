@@ -101,10 +101,12 @@
     <Compile Include="MahjongBuddyApplicationModule.cs" />
     <Compile Include="MahjongBuddyAppServiceBase.cs" />
     <Compile Include="MjGames\Dto\CreateMjGameInput.cs" />
+    <Compile Include="MjGames\Dto\CreateMjGameSessionInput.cs" />
     <Compile Include="MjGames\Dto\GetMjGamesInput.cs" />
     <Compile Include="MjGames\Dto\GetMjGamesOutput.cs" />
-    <Compile Include="MjGames\Dto\JoinMjGameInput.cs" />
+    <Compile Include="MjGames\Dto\AddUserToSessionInput.cs" />
     <Compile Include="MjGames\Dto\MjGameDto.cs" />
+    <Compile Include="MjGames\Dto\RemoveUserFromSessionInput.cs" />
     <Compile Include="MjGames\IMjGameAppService.cs" />
     <Compile Include="MjGames\MjGameAppService.cs" />
     <Compile Include="MultiTenancy\Dto\CreateTenantInput.cs" />

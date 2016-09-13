@@ -5,9 +5,12 @@ using Abp.RealTime;
 using Abp.Runtime.Session;
 using Castle.Core.Logging;
 using MahjongBuddy.Connection;
+using MahjongBuddy.Game;
 using MahjongBuddy.Games;
+using MahjongBuddy.MjGames.Dto;
 using MahjongBuddy.Users;
 using Microsoft.AspNet.SignalR;
+using System;
 using System.Threading.Tasks;
 
 namespace MahjongBuddy.Web
@@ -32,10 +35,49 @@ namespace MahjongBuddy.Web
             _mjGameAppService = mjGameAppService;
         }
 
+        public void CreateMjGame(CreateMjGameInput input)
+        {
+            //when creating new game
+            //1.create game
+            var newGame = _mjGameAppService.CreateMjGame(input);
+
+            //2.create initial game session
+            var currentUser = _userRepository.Get(AbpSession.GetUserId());
+            var session = new CreateMjGameSessionInput
+            {
+                MjGameId = newGame.Id,
+                GameNo = 1,
+                Wind = MjGameWind.East,
+            };
+
+            //session.Users.Add(currentUser);
+            var newSession = _mjGameAppService.CreateMjGameSession(session);
+
+            newGame.ActiveSessionId = newSession.Id;
+
+            //3.if everything worked out, add game creator to this session
+            Groups.Add(Context.ConnectionId, newSession.Id.ToString());
+        }
+
         public void SendMessage(string message)
         {
             Clients.All.getMessage(string.Format("User {0}: {1}", AbpSession.UserId, message));
         }
+
+        public void JoinGame(MjGame game)
+        {
+            var user = _userRepository.Get(AbpSession.GetUserId());
+            if (!game.ActiveSessionId.HasValue)
+            {
+                throw new Exception("Unable to find game session");
+            }
+            _mjGameAppService.AddUserToSession(new AddUserToSessionInput {
+                GameSessionId = game.ActiveSessionId.Value,
+                User = user
+            });
+            Groups.Add(Context.ConnectionId, game.ActiveSessionId.ToString());
+        }       
+
         [UnitOfWork]
         public async override Task OnConnected()
         {
@@ -44,15 +86,19 @@ namespace MahjongBuddy.Web
 
             if (user != null)
             {
-                var test = user.SrConnections;
-
                 user.SrConnections.Add(new MjSignalRConnection
                 {
                     ConnectionId = Context.ConnectionId,
                     Connected = true,
                     UserAgent = Context.Request.Headers["User-Agent"]
                 });
+
+                foreach (var session in user.MjGameSessions)
+                {
+                    await Groups.Add(Context.ConnectionId, session.Id.ToString());
+                }
             }
+
             _userRepository.Update(user);
             
             Logger.Debug("A client connected to MyChatHub: " + Context.ConnectionId);

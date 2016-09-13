@@ -17,7 +17,7 @@
                         <td>{{game.mjRuleName}}</td>
                         <td>{{game.isPrivateGame ? '@L("Yes")' : '@L("No")'}}</td>
                         <td>{{game.totalPlayers}}/4</td>
-                        <td><button class="btn btn-primary" id="{{game.Id}}">@L("Join")</button></td>
+                        <td><button class="btn btn-primary" ng-click="vm.joinGame(game)" id="{{game.Id}}">@L("Join")</button></td>
                     </tr>
                 </tbody>
             </table>        
