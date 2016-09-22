@@ -106,6 +106,7 @@
     <Compile Include="MjGames\Dto\GetMjGamesOutput.cs" />
     <Compile Include="MjGames\Dto\AddUserToSessionInput.cs" />
     <Compile Include="MjGames\Dto\MjGameDto.cs" />
+    <Compile Include="MjGames\Dto\MjGameSessionDto.cs" />
     <Compile Include="MjGames\Dto\RemoveUserFromSessionInput.cs" />
     <Compile Include="MjGames\IMjGameAppService.cs" />
     <Compile Include="MjGames\MjGameAppService.cs" />

@@ -10,7 +10,7 @@ namespace MahjongBuddy.Games
     {
         MjGame CreateMjGame(CreateMjGameInput input);
         MjGameSession CreateMjGameSession(CreateMjGameSessionInput input);
-        void UpdateMjGame(MjGameDto input);
+        void UpdateMjGame(MjGame input);
         GetMjGamesOutput GetMjGames(GetMjGamesInput input);
         void AddUserToSession(AddUserToSessionInput input);
         void RemoveUserFromSession(RemoveUserFromSessionInput input);

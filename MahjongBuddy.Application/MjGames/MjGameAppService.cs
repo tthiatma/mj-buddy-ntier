@@ -13,15 +13,17 @@ namespace MahjongBuddy.Games
     public class MjGameAppService : IMjGameAppService
     {
         private readonly IMjGameRepository _mjGameRepository;
-        private readonly IRepository<MjGameSession, long> _mjGameSessionRepository;
+        private readonly IMjGameSessionRepository _mjGameSessionRepository;
         private readonly IOnlineClientManager _onlineClientmanager;
+        private readonly IRepository<User, long> _userRepository;
         public IAbpSession AbpSession { get; set; }
 
         public MjGameAppService(IMjGameRepository mjGameRepository, 
             IRepository<User, long> userRepository, 
             IOnlineClientManager onlineClientmanager,
-            IRepository<MjGameSession, long> mjGameSessionRepository)
+            IMjGameSessionRepository mjGameSessionRepository)
         {
+            _userRepository = userRepository;
             _mjGameRepository = mjGameRepository;
             _onlineClientmanager = onlineClientmanager;
             _mjGameSessionRepository = mjGameSessionRepository;
@@ -35,28 +37,36 @@ namespace MahjongBuddy.Games
             return _mjGameRepository.Insert(game);
         }
 
-        public void UpdateMjGame(MjGameDto input)
+        public void UpdateMjGame(MjGame input)
         {
-            var game = input.MapTo<MjGame>();
-            _mjGameRepository.Update(game);
+            _mjGameRepository.Update(input);
         }
 
         public MjGameSession CreateMjGameSession(CreateMjGameSessionInput input)
         {
-            //var session = input.MapTo<MjGameSession>();
+            List<User> users = new List<User>();
+
+            foreach (var userId in input.UsersId)
+            {
+                users.Add(_userRepository.Get(userId));
+            }
+
             var session = new MjGameSession() {
                 GameNo = input.GameNo,
                 MjGameId = input.MjGameId,
-                Wind = input.Wind
+                Wind = input.Wind,
+                Users = users,                
             };
+            var newSession = _mjGameSessionRepository.Insert(session);
 
-            return _mjGameSessionRepository.Insert(session);
+            return newSession;
         }
 
         public void AddUserToSession(AddUserToSessionInput input)
         {
             var session = _mjGameSessionRepository.Get(input.GameSessionId);
-            session.Users.Add(input.User);
+            var user = _userRepository.Get(input.UserId);
+            session.Users.Add(user);
         }
 
         public void RemoveUserFromSession(RemoveUserFromSessionInput input)
@@ -66,10 +76,23 @@ namespace MahjongBuddy.Games
         }
 
         //TODO probably make this function async
+        public GetMjGamesOutput GetMjGameSessions(GetMjGamesInput input)
+        {
+            //TODO need to limit game query
+            var games = _mjGameSessionRepository.GetAllWithUsers().ToList();
+
+            return new GetMjGamesOutput
+            {
+                Items = games != null ? games.MapTo<List<MjGameDto>>() : null
+            };
+        }
+
+
+        //TODO probably make this function async
         public GetMjGamesOutput GetMjGames(GetMjGamesInput input)
         {
             //TODO need to limit game query
-            var games = _mjGameRepository.GetAllWithUsers().ToList();
+            var games = _mjGameRepository.GetAll();
                        
             return new GetMjGamesOutput
             {

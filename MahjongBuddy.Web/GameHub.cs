@@ -1,4 +1,5 @@
 ﻿using Abp.Dependency;
+using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using Abp.Domain.Uow;
 using Abp.RealTime;
@@ -43,17 +44,21 @@ namespace MahjongBuddy.Web
 
             //2.create initial game session
             var currentUser = _userRepository.Get(AbpSession.GetUserId());
-            var session = new CreateMjGameSessionInput
+
+            var dSesssion = new CreateMjGameSessionInput
             {
                 MjGameId = newGame.Id,
                 GameNo = 1,
                 Wind = MjGameWind.East,
             };
 
-            //session.Users.Add(currentUser);
-            var newSession = _mjGameAppService.CreateMjGameSession(session);
+            dSesssion.UsersId.Add(AbpSession.GetUserId());
+
+            var newSession = _mjGameAppService.CreateMjGameSession(dSesssion);
 
             newGame.ActiveSessionId = newSession.Id;
+
+            _mjGameAppService.UpdateMjGame(newGame);
 
             //3.if everything worked out, add game creator to this session
             Groups.Add(Context.ConnectionId, newSession.Id.ToString());
@@ -64,16 +69,15 @@ namespace MahjongBuddy.Web
             Clients.All.getMessage(string.Format("User {0}: {1}", AbpSession.UserId, message));
         }
 
-        public void JoinGame(MjGame game)
+        public void JoinGame(MjGameDto game)
         {
-            var user = _userRepository.Get(AbpSession.GetUserId());
             if (!game.ActiveSessionId.HasValue)
             {
                 throw new Exception("Unable to find game session");
             }
             _mjGameAppService.AddUserToSession(new AddUserToSessionInput {
                 GameSessionId = game.ActiveSessionId.Value,
-                User = user
+                UserId = AbpSession.GetUserId()
             });
             Groups.Add(Context.ConnectionId, game.ActiveSessionId.ToString());
         }       

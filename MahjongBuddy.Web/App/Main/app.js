@@ -49,6 +49,11 @@
                     templateUrl: '/App/Main/views/lobby/lobby.cshtml',
                     menu: 'Lobby' //Matches to name of 'Lobby' menu in MahjongBuddyNavigationProvider
                 })
+                .state('game', {
+                    url: '/game',
+                    templateUrl: '/App/Main/views/game/game.cshtml',
+                    menu: 'Game' 
+                })
                 .state('about', {
                     url: '/about',
                     templateUrl: '/App/Main/views/about/about.cshtml',

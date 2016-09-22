@@ -15,11 +15,5 @@ namespace MahjongBuddy.EntityFramework.Repositories
             : base(dbContextProvider)
         {
         }
-
-        public IQueryable<MjGame> GetAllWithUsers()
-        {
-            var query = GetAll().Include(g => g.Users);
-            return query;
-        }
     }
 }

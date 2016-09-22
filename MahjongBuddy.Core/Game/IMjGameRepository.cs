@@ -9,6 +9,5 @@ namespace MahjongBuddy.Game
 {
     public interface IMjGameRepository : IRepository<MjGame, long>
     {
-        IQueryable<MjGame> GetAllWithUsers();
     }
 }

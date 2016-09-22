@@ -117,6 +117,7 @@
     <Compile Include="EntityFramework\MahjongBuddyDbContext.cs" />
     <Compile Include="EntityFramework\Repositories\MahjongBuddyRepositoryBase.cs" />
     <Compile Include="EntityFramework\Repositories\MjGameRepository.cs" />
+    <Compile Include="EntityFramework\Repositories\MjGameSessionRepository.cs" />
     <Compile Include="Migrations\201506210746108_AbpZero_Initial.cs" />
     <Compile Include="Migrations\201506210746108_AbpZero_Initial.Designer.cs">
       <DependentUpon>201506210746108_AbpZero_Initial.cs</DependentUpon>
@@ -177,9 +178,9 @@
     <Compile Include="Migrations\201605041151380_UserAccount_And_Notification_Changes.Designer.cs">
       <DependentUpon>201605041151380_UserAccount_And_Notification_Changes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201609130609293_InitialMjGame.cs" />
-    <Compile Include="Migrations\201609130609293_InitialMjGame.Designer.cs">
-      <DependentUpon>201609130609293_InitialMjGame.cs</DependentUpon>
+    <Compile Include="Migrations\201609190153175_InitialMjGame.cs" />
+    <Compile Include="Migrations\201609190153175_InitialMjGame.Designer.cs">
+      <DependentUpon>201609190153175_InitialMjGame.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AbpZeroDbMigrator.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -250,8 +251,8 @@
     <EmbeddedResource Include="Migrations\201605041151380_UserAccount_And_Notification_Changes.resx">
       <DependentUpon>201605041151380_UserAccount_And_Notification_Changes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201609130609293_InitialMjGame.resx">
-      <DependentUpon>201609130609293_InitialMjGame.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201609190153175_InitialMjGame.resx">
+      <DependentUpon>201609190153175_InitialMjGame.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

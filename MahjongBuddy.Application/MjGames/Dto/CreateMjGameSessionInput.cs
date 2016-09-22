@@ -9,13 +9,13 @@ namespace MahjongBuddy.MjGames.Dto
     public class CreateMjGameSessionInput
     {
         public long MjGameId { get; set; }
-        public ICollection<User> Users { get; set; }
+        public ICollection<long> UsersId { get; set; }
         public MjGameWind Wind { get; set; }
         public int GameNo { get; set; }
 
         public CreateMjGameSessionInput()
         {
-            Users = new List<User>();
+            UsersId = new List<long>();
         }
     }
 }

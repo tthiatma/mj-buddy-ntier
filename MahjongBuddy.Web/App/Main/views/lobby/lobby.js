@@ -10,8 +10,8 @@
         gameHub.server.sendMessage("Hi everybody, I'm connected to the chat!"); //send a message to the server
     });
     angular.module('app').controller(controllerId, [
-        '$scope', '$modal', 'abp.services.app.mjGame',
-        function ($scope, $modal, mjGameService) {
+        '$scope', '$location', '$modal', 'abp.services.app.mjGame',
+        function ($scope, $location, $modal, mjGameService) {
             var vm = this;
 
             vm.games = [];
@@ -21,10 +21,9 @@
             };
 
             vm.joinGame = function (game) {
-                mjGameService.joinGame(game)
-                .success(function (result) {
-                })
-            };
+                gameHub.server.joinGame(game)
+                $location.path('/game');
+                };
             var getAllMjGames = function () {
                 mjGameService.getMjGames(
                         vm.getMjGamesInput

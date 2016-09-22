@@ -13,7 +13,7 @@ namespace MahjongBuddy.Game
     {
         /// <summary>
         /// reference which room this session belongs to
-        /// </summary>
+        /// </summary
         [ForeignKey("MjGameId")]
         public virtual MjGame MJGame { get; set; }
         public virtual long? MjGameId { get; set; }

@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Connection\MjSignalRConnection.cs" />
+    <Compile Include="Game\IMjGameSessionRepository.cs" />
     <Compile Include="Game\MjGameSessionResult.cs" />
     <Compile Include="Game\MjGamePlayerResultState.cs" />
     <Compile Include="Game\MjGameWind.cs" />

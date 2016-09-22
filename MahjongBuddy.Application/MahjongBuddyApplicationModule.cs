@@ -15,6 +15,9 @@ namespace MahjongBuddy
             {
                 //Add your custom AutoMapper mappings here...
                 //mapper.CreateMap<,>()
+                mapper.CreateMap<MjGameSession, MjGameSessionDto>()
+                .ForMember(dest => dest.TotalPlayers, opt => opt.MapFrom(src => src.Users.Count));
+
                 mapper.CreateMap<MjGame, MjGameDto>()
                 .ForMember(dest => dest.TotalPlayers, opt => opt.MapFrom(src => src.Users.Count));
             });

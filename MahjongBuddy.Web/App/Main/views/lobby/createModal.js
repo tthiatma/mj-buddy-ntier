@@ -14,7 +14,7 @@
 
             vm.createMjGame = function () {
                 gameHub.server.createMjGame(vm.game);
-                $location.path('/');
+                $location.path('/game');
                 $modalInstance.close();
             };
 

@@ -5,12 +5,14 @@ using MahjongBuddy.Game;
 namespace MahjongBuddy.MjGames.Dto
 {
     [AutoMapFrom(typeof(MjGame))]
-    public class MjGameDto : EntityDto
+    public class MjGameDto : EntityDto<long>
     {
         public int TotalPlayers { get; set; }
         public string MjRuleName { get; set; }
         public MjGameState State { get; set; }
         public int MjRuleId { get; set; }
         public bool IsPrivateGame { get; set; }
+        public long? ActiveSessionId { get; set; }
+
     }
 }
